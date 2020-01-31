@@ -39,8 +39,8 @@ jobs:
 
     - name: Verifying
       run: |
-	pwd
-	dotnet test --no-build --output $BUILD_OUTPUT /p:CollectCoverage=true /p:CoverletOutputFormat=opencover --logger "trx;LogFileName=${{github.workspace}}/Results.trx" 
+        pwd
+        dotnet test --no-build --output $BUILD_OUTPUT /p:CollectCoverage=true /p:CoverletOutputFormat=opencover --logger "trx;LogFileName=${{github.workspace}}/Results.trx" 
 
     - name: Saving of test log
       uses: actions/upload-artifact@v1.0.0
