@@ -20,6 +20,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - run
+      echo "::setenv year=$(date +%Y)"
+
     - uses: actions/checkout@v1
 
     - uses: actions/setup-dotnet@v1
@@ -58,11 +61,9 @@ jobs:
         --configuration Release
         -p:PackageVersion=$VERSION_PREFIX
         -p:Title= <Enter a title here>
-        -p:Authors= <Some Names here>
-        -p:PackageDescription= <>
-        -p:Copyright= <(C) ${{ github.actor}} 2020>
+        -p:Authors= ${{ github.actor}}
+        -p:Copyright= (C) ${{ github.actor}} 2020
         -p:PackageLicenseExpression=$LICENSE_EXPRESSION
-        -p:PackageIconUrl=<>
         -p:PackageReleaseNotes= <${{ github.event.commits.head_commit.message }}>
         -p:IncludeSymbols=true
         -p:RepositoryUrl=${{ github.repositoryUrl }}
