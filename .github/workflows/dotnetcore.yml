@@ -10,7 +10,7 @@ env:
   # some useful values to versioning, etc.
   BUILD_OUTPUT: ${{github.workspace}}/build-${{github.run_number}}
   BUILD_NUMBER: ${{github.run_number}}
-  VERSION_SUFFIX: ${{VERSION_SUFFIX_PREFIX}}${{BUILD_NUMBER}}
+  VERSION_SUFFIX: $VERSION_SUFFIX_PREFIX$BUILD_NUMBER
 
 on: [push]
 
