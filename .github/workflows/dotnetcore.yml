@@ -21,7 +21,7 @@ jobs:
 
     steps:
     - run
-      echo "::setenv year=$(date +%Y)"
+      echo "::set-env year=$(date +%Y)"
 
     - uses: actions/checkout@v1
 
