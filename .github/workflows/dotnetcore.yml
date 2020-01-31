@@ -39,7 +39,7 @@ jobs:
 
     - name: Verifying
       run: 
-        dotnet test $SLN_DIR--no-build --output $BUILD_OUTPUT /p:CollectCoverage=true /p:CoverletOutputFormat=opencover --logger "trx;LogFileName=${{github.workspace}}/Results.trx" 
+        dotnet test $SLN_DIR --no-build --output $BUILD_OUTPUT /p:CollectCoverage=true /p:CoverletOutputFormat=opencover --logger "trx;LogFileName=${{github.workspace}}/Results.trx" 
 
     - name: Saving of test log
       uses: actions/upload-artifact@v1.0.0
