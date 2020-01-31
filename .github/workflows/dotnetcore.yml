@@ -29,7 +29,7 @@ jobs:
     - name: Building
       run: |
         cd $SLN_DIR
-        dotnet build -p:VersionPrefix=$VERSION_PREFIX -p:VersionSuffx=$VERSION_SUFFIX --configuration Release --output $BUILD_OUTPUT
+        dotnet build -noLogo -p:VersionPrefix=$VERSION_PREFIX -p:VersionSuffx=$VERSION_SUFFIX --configuration Release --output $BUILD_OUTPUT
 
     - name: Saving of artifacts
       uses: actions/upload-artifact@v1.0.0
@@ -38,9 +38,8 @@ jobs:
         path: ${{env.BUILD_OUTPUT}}
 
     - name: Verifying
-      run: |
-        pwd
-        dotnet test --no-build --output $BUILD_OUTPUT /p:CollectCoverage=true /p:CoverletOutputFormat=opencover --logger "trx;LogFileName=${{github.workspace}}/Results.trx" 
+      run: 
+        dotnet test $SLN_DIR--no-build --output $BUILD_OUTPUT /p:CollectCoverage=true /p:CoverletOutputFormat=opencover --logger "trx;LogFileName=${{github.workspace}}/Results.trx" 
 
     - name: Saving of test log
       uses: actions/upload-artifact@v1.0.0
@@ -55,7 +54,7 @@ jobs:
 
     - name: Packaging
       run: >
-        dotnet pack -p:OutputPath=$BUILD_OUTPUT
+        dotnet pack $SLN_DIR -p:OutputPath=$BUILD_OUTPUT
         --configuration Release
         -p:PackageVersion=$VERSION_PREFIX
         -p:Title= <Enter a title here>
