@@ -23,7 +23,7 @@ jobs:
     - uses: actions/checkout@v1
 
     - run:
-        echo "::set-env year=$(date +%Y)"
+        echo "::set-env name=year::$(date +%Y)"
 
     - run:
         echo ${{env.year}}
