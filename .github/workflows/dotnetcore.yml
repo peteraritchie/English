@@ -92,7 +92,7 @@ jobs:
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.2
       with:
-        nuget-api-key: ${{ secrets.GITHUB_TOKEN }}
+        nuget-api-key: ${{ secrets.PACKAGE_WRITE_KEY_GITHUB }}
         nuget-version: latest
 
     - name: Setup DotNet
@@ -107,7 +107,7 @@ jobs:
         path: ${{env.BUILD_OUTPUT}}
 
     - name: Push to GitHub Packages
-      run: dotnet nuget push "${{env.BUILD_OUTPUT}}/*.nupkg" --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/${{ github.repository }}/index.json
+      run: dotnet nuget push "${{env.BUILD_OUTPUT}}/*.nupkg" --api-key ${{ secrets.PACKAGE_WRITE_KEY_GITHUB }} --source https://nuget.pkg.github.com/${{ github.repository }}/index.json
 
     - name: WAT?
       if: failure()
