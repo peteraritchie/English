@@ -1,7 +1,7 @@
 name: .NET Core
 
 env:
-  DOTNET_VERSION: 3.1               # *** Change to necessary version ***
+  DOTNET_VERSION: 3.1.100           # *** Change to necessary version ***
   VERSION_PREFIX: 0.1.0             # *** Change the version when necessary ***
   VERSION_SUFFIX_PREFIX: beta       # *** Set this to something else if "beta" isn't good ***
   SLN_DIR: ./src                    # *** Change this if your sln isn't in this directory ***
