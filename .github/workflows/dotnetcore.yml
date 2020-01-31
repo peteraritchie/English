@@ -22,12 +22,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - run:
-        echo "::set-env name=year::$(date +%Y)"
-
-    - run:
-        echo ${{env.year}}
-
     - uses: actions/setup-dotnet@v1
       with:
         dotnet-version: ${{env.DOTNET_VERSION}}
@@ -58,16 +52,18 @@ jobs:
       if: failure()
       run: find . -name Results.trx
 
+    - run:
+        echo "::set-env name=year::$(date +%Y)"
+
     - name: Packaging
       run: >
         dotnet pack $SLN_DIR -p:OutputPath=$BUILD_OUTPUT
         --configuration Release
         -p:PackageVersion=$VERSION_PREFIX
-        -p:Title= <Enter a title here>
-        -p:Authors= ${{ github.actor}}
-        -p:Copyright= (C) ${{ github.actor}} 2020
+        -p:Authors=${{ github.actor}}
+        -p:Copyright="(C) ${{ github.actor}} ${{env.year}}"
         -p:PackageLicenseExpression=$LICENSE_EXPRESSION
-        -p:PackageReleaseNotes= <${{ github.event.commits.head_commit.message }}>
+        -p:PackageReleaseNotes=${{ github.event.commits.head_commit.message }}
         -p:IncludeSymbols=true
         -p:RepositoryUrl=${{ github.repositoryUrl }}
         -p:RepositoryType=git
